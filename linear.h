@@ -1,8 +1,11 @@
 #ifndef LINEAR_H
 #define LINEAR_H
 
-#include <stdlib.h> /* malloc, free */
+#include <stdlib.h> /* malloc, free, atof */
 #include <stdio.h>  /* printf */
+#include <string.h> /* strtok */
+
+#define B_SIZE 1024
 
 /* Vector */
 
@@ -27,6 +30,8 @@ Matrix Matrix_create(int i, int j);
 void Matrix_destroy(Matrix A, int i);
 
 void Matrix_print(Matrix A, int i, int j);
+
+    /* Augmented */
 
 typedef Matrix Augmented;
 

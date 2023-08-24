@@ -53,13 +53,11 @@ void back_substitution(Matrix A, Vector x, Vector b, int order) {
     }
 }
 
-#define B_SIZE 1024
-
 int main() {
     char BUFFER[B_SIZE];
 
-    Vector b, b1,x;
-    Matrix A, A1;
+    Vector b, x;
+    Matrix A;
 
     int order;
 
@@ -72,33 +70,24 @@ int main() {
 
         Augmented_read(A, b, order);
 
-        /*
-        puts("Matrix A:");
         Matrix_print(A, order, order);
-
-        puts("Vector b:");
         Vector_print(b, order);
-        */
 
-        gaussian_elimination(A, b, order);
-      //gaussian_var(A, b, order);
+        for(int i = 0; i < 1; ++i) {
+            //clone
+            gaussian_elimination(A, b, order); //funct pointer
+            //gaussian_var(A, b, order);
+            back_substitution(A, x, b, order);
 
-        /*
-        puts("Matrix A:");
-        Matrix_print(A, order, order);
-
-        puts("Vector b:");
-        Vector_print(b, order);
-        */
-
-        back_substitution(A, x, b, order);
-
-        puts("Vector x:");
-        Vector_print(x, order);
+            puts("Vector x:"); 
+                Vector_print(x, order);
+        }
 
         Matrix_destroy(A, order);
         Vector_destroy(b);
         Vector_destroy(x);
+
+        getchar(); // '\n' || EOF 
     }
 
     return 0;
