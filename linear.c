@@ -16,6 +16,11 @@ void Vector_print(Vector x, int i) {
     printf("\n\n");
 }
 
+void Vector_sub(Vector x, Vector y, Vector z, int order) {
+    for (int i = 0; i < order; ++i)
+        z[i] = x[i] - y[i];
+}
+
 /* Matrix */
 
 Matrix Matrix_create(int i, int j) {
@@ -25,6 +30,16 @@ Matrix Matrix_create(int i, int j) {
         A[i] = malloc(sizeof (double) * j);
 
     return A;
+}
+
+Matrix Matrix_clone(Matrix A, int i, int j) {
+    Matrix C = Matrix_create(i, j); 
+
+    for (int k = 0; k < i; ++k)
+        for (int l = 0; l < j; ++l)
+            C[k][l] = A[k][l];
+
+    return C;
 }
 
 void Matrix_destroy(Matrix A, int i) {
@@ -42,6 +57,17 @@ void Matrix_print(Matrix A, int i, int j) {
     }
     
     putchar('\n');
+}
+
+void Matrix_Vector_mul(Matrix A, Vector x, Vector b, int order) {
+    int i, j;
+
+    for (i = 0; i < order; ++i)
+        b[i] = 0;
+
+    for (i = 0; i < order; ++i)
+        for (j = 0; j < order; ++j) 
+            b[i] += A[i][j] * x[i];
 }
 
     /* Augmented */
