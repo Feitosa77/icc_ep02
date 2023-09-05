@@ -13,11 +13,13 @@ typedef double* Vector; /* v[k], k \in [0..order-1] */
 
 Vector Vector_create(int order);
 
+Vector Vector_clone(Vector x, int order);
+
 void Vector_destroy(Vector x);
 
 void Vector_print(Vector x, int order);
 
-void Vector_sub(Vector x, Vector y, Vector z,  int order);
+void Vector_sub(Vector x, Vector y, Vector z,  int order); /* z = x-y */
 
 /* Matrix */
 
@@ -31,7 +33,7 @@ void Matrix_destroy(Matrix A, int i);
 
 void Matrix_print(Matrix A, int i, int j);
 
-void Matrix_Vector_mul(Matrix A, Vector x, Vector b, int order);
+void Matrix_Vector_mul(Matrix A, Vector x, Vector b, int order); /* b = Ax */
 
     /* Augmented */
 

@@ -6,6 +6,15 @@ Vector Vector_create(int order) {
     return malloc(sizeof (double) * order);
 }
 
+Vector Vector_clone(Vector x, int order) {
+    Vector y = Vector_create(order);
+
+    for (int i = 0; i < order; ++i)
+        y[i] = x[i];
+
+    return y;
+}
+
 void Vector_destroy(Vector x) {
     free(x);
 }
