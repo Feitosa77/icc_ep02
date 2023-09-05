@@ -11,9 +11,9 @@
 
 typedef double* Vector; /* v[k], k \in [0..order-1] */
 
-Vector Vector_create(int order);
+Vector Vector_create(int order); 
 
-Vector Vector_clone(Vector x, int order);
+Vector Vector_clone(Vector x, int order); /* Retorna uma copia de x */
 
 void Vector_destroy(Vector x);
 
@@ -27,7 +27,7 @@ typedef double** Matrix; /* v[l][k], l \in [0..i-1], k \in [0..j-1] */
 
 Matrix Matrix_create(int i, int j);
 
-Matrix Matrix_clone(Matrix A, int i, int j);
+Matrix Matrix_clone(Matrix A, int i, int j); /* Retorna uma copia de A */
 
 void Matrix_destroy(Matrix A, int i);
 
@@ -39,6 +39,10 @@ void Matrix_Vector_mul(Matrix A, Vector x, Vector b, int order); /* b = Ax */
 
 typedef Matrix Augmented;
 
+/* Le da stdin um inteiro n
+    seguido de n streams de n+1 inteiros
+    Quebra esses valoers em uma matriz A_nxn e um vetor b
+*/
 void Augmented_read(Matrix A, Vector b, int order);
 
 #endif
