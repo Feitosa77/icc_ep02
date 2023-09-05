@@ -1,19 +1,22 @@
 #include "elimination.h"
 
-/**
- * Falta implementar o pivoteamento em todas as EG
- **/
-
 /* Pivoteamento */
 
-void pivot(Matrix A, Vector b, int i, int *buf) {
- 
-}
+void pivot(Matrix A, Vector b, int order, int p) {
+    int max = p;
+    double *m_aux = A[p];
+    double v_aux = b[p];
 
-void unpivot(Vector x, int *buf) {
+    for (int i = p; i < order; ++i) /* Encontra o maior coeficiente da coluna p */
+        if (fabs(A[i][p]) - fabs(A[max][p]) > DBL_EPSILON) /* !!! */
+            max = i;
 
+    A[p] = A[max];
+    A[max] = m_aux;
+
+    b[p] = b[max];
+    b[max] = v_aux;
 }
-    
 
 /* 1. Forma classica com pivoteamento */
 
@@ -21,7 +24,9 @@ void gaussian_elimination(Matrix A, Vector x, Vector b, int order) {
     int i, j, k;
     double m;
 
-    for (i = 0; i < order; ++i)           /* Colunas */
+    for (i = 0; i < order; ++i) {         /* Colunas */
+        pivot(A, b, order, i);
+
         for (k = i+1; k < order; ++k) {   /* Linhas */
             m = A[k][i] / A[i][i];
 
@@ -30,9 +35,9 @@ void gaussian_elimination(Matrix A, Vector x, Vector b, int order) {
 
             b[k] -= b[i] * m;
         }
+    }
 
-      back_substitution(A, x, b, order);
-      //unpivot(x);
+    back_substitution(A, x, b, order);
 }
 
 /* 2. Forma classica com pivoteamento, sem o calculo dos multiplicadores */
@@ -41,7 +46,9 @@ void gaussian_var(Matrix A, Vector x, Vector b, int order) {
     int i, j, k;
     double m;
 
-    for (i = 0; i < order; ++i)         /* Colunas */
+    for (i = 0; i < order; ++i) {       /* Colunas */
+        pivot(A, b, order, i);
+
         for (k = i+1; k < order; ++k) { /* Linhas */
             m = A[k][i];
 
@@ -50,9 +57,9 @@ void gaussian_var(Matrix A, Vector x, Vector b, int order) {
 
             b[k] = b[k] * A[i][i] - b[i] * m;
         }
+    }
         
-      back_substitution(A, x, b, order);
-      //unpvot(x);
+    back_substitution(A, x, b, order);
 }
 
 /* 3. Forma Alternativa (Explicacao no enunciado do ep) */
@@ -66,7 +73,7 @@ void gaussian_alt(Matrix A, Vector x, Vector b, int order) {
             A[i][j] /= m;
         b[i] /= m;
 
-        for (k = i+1; k < order; ++k) {          /* Proceder com a eliminacaos */
+        for (k = i+1; k < order; ++k) {          /* Proceder com a eliminacao */
             m = A[k][i];
 
             for (j = i; j < order; ++j)          
@@ -76,7 +83,7 @@ void gaussian_alt(Matrix A, Vector x, Vector b, int order) {
         }
     }
 
-    back_substitution(A, x, b, order); /* Calcular por retro-substituicao */
+    back_substitution(A, x, b, order);           /* Calcular por retro-substituicao */
 }
 
 /* A is upper triangular */
