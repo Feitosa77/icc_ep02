@@ -22,13 +22,7 @@ utils.o: utils.c utils.h
 	$(CC) -c utils.c
 
 clean:
-	@rm -f *.o
+	rm -f *.o
 
 purge: clean
-	@rm -f $(TARGET)
-
-dist: purge
-	@echo "Gerando arquivo de distribuição ($(DISTDIR).tar) ..."
-	@ln -s . $(DISTDIR)
-	@tar -cvf $(DISTDIR).tar $(addprefix ./$(DISTDIR)/, $(DISTFILES))
-	@rm -f $(DISTDIR)
+	rm -f $(TARGET)

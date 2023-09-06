@@ -1,0 +1,2 @@
+- Metodo 3 falha se o pivo for 0
+- Metodo 2 asdfasd
