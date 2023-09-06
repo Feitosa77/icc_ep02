@@ -19,6 +19,8 @@ void Vector_destroy(Vector x);
 
 void Vector_print(Vector x, int order);
 
+void Vector_printf(Vector x, int order);
+
 void Vector_sub(Vector x, Vector y, Vector z,  int order); /* z = x-y */
 
 /* Matrix */

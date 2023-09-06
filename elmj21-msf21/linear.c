@@ -19,10 +19,19 @@ void Vector_destroy(Vector x) {
     free(x);
 }
 
-void Vector_print(Vector x, int i) {
-    for (int k = 0; k < i; ++k)
-        printf(" %lf ", x[k]);
+void Vector_print(Vector x, int order) {
+    for (int i = 0; i < order; ++i)
+        printf(" %lf ", x[i]);
     printf("\n\n");
+}
+
+void Vector_printf(Vector x, int order) {
+    putchar('[');
+
+    for (int i = 0; i < order; ++i)
+        printf("%lf ", x[i]);
+
+    puts("]");
 }
 
 void Vector_sub(Vector x, Vector y, Vector z, int order) {
